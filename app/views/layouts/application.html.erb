@@ -1,77 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <%= render 'head_meta' %>
-  <%= stylesheet_link_tag 'vendor' %>
-  <%= stylesheet_link_tag 'application' %>
-  <%= yield :extra_styles %>
-  <%= javascript_include_tag 'header' %>
-  <!--[if lt IE 9]>
-  <%= javascript_include_tag '_sub/ie' %>
-  <![endif]-->
-  <%= render 'shared/the door_init' %>
-  <%= render("ga") %>
-  <% # Note: Put Google Analytics JS just before closing HEAD tag as per http://support.google.com/analytics/bin/answer.py?hl=en&answer=1008080 %>
-  <%= render("kissmetrics") if kissmetrics_enabled? %>
-  <%= render("fb_conversion_pixel") if Rails.env.production? %>
-  <%= render('optimizely_top') if optimizely_enabled? %>
-  <%= render('click_tale_top') if click_tale_enabled? %>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim'%>
+
+
 </head>
-<body ng-app="The Door">
-  <div id="global-overlay" class="overlay" style="display:none;"></div>
-  <div id="fb-root"></div>
-  <%= render 'shared/intro_bar' %>
-  <div id="container">
-    <% if Rails.env.qa? %>
-      <div id="qa-header" style="text-align: center; background: #FF9900; color: white;">
-        <p>You are in QA environment :)</p>
-        </div>
-    <% end %>
-    <div id="main-outer" class="cf">
-      <% unless !user_signed_in? && current_page?(root_path) %>
-        <div id="header" class="cf<%= user_signed_in? && current_user.show_hr_nav? && !(params[:controller] == "about" && (params[:action] == "list" || params[:action] == "landing" || params[:action] == "pricing" || params[:action] == "clients" || params[:action] == "features")) && params[:controller] != "client_inquiries" && params[:controller] != "enterprise/form/companies" && params[:controller] != "profile_steps" && !params[:controller].to_s.start_with?("team") ? ' gray-header' : '' %>" >
-          <div id="header-inner">
-            <% if yield(:header).empty? %>
-              <%= render 'header' %>
-            <% else %>
-              <%= yield :header %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <%= render 'notification_header' %>
-      <%= yield :sub_header %>
+<body>
+  <%= render 'layouts/header' %>
+  <div class="container">
+  <% flash.each do |key, value| %>
+  <%= content_tag(:div,value,class: "alert alert-#{key}") %>
+  <% end %>
 
-      <div id="main" class="<%= main_content_classes(action: @current_action) %>">
-        <div id="main-inner" class="cf">
-          <%= yield %>
-        </div>
-        <p id="back-top">
-          <a href="#top"><%= image_tag("page-top-icon.png") %></a>
-        </p>
-      </div>
+    <%= yield %>
+   <%= render 'layouts/footer' %>
+   <%= debug(params) if Rails.env.development? %>
+</div>
+    
 
-      <%= yield :sub_footer %>
 
-      <% if show_footer? %>
-        <footer>
-          <div id="footer-inner">
-            <% if yield(:footer).empty? %>
-              <%= render 'footer' %>
-            <% else %>
-              <%= yield :footer %>
-            <% end %>
-          </div>
-        </footer>
-      <% end %>
-    </div>
-  </div>
-<%= render_auto_open_popup %>
-  <%= render_dialog("dialog_need_upgrade", id: 'need-to-upgrade', title: t('enterprise_projects_index.need_to_upgrade_title'), scroll: true) if user_signed_in? && current_user.show_hr_nav? %>
-  <%= render_dialog "feedback_popup", id: "feedback-confirm", title: t('popup.feedback_confirmation') %>
-  <%= render_dialog "/shared/login_modal", id: "login_modal", title: t('header.non_login.login') %>
-  <%= render "shared/footer_scripts" %>
-  <%= render "admin/base/note" if !Rails.env.production? && user_signed_in? && current_user.admin? %>
 </body>
 </html>
