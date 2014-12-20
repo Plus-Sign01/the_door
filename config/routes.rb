@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  resources :projects
+
   get 'static_pages/home'
 
   get 'static_pages/help'
