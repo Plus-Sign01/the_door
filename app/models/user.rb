@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :created_projects, class_name: 'Project'
 	def self.find_or_create_from_auth_hash(auth_hash)
 		provider = auth_hash[:provider]
 		uid = auth_hash[:uid]
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
            user.image_url = image_url
        end
    end
-   
+
 
 
 
