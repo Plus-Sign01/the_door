@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :created_projects, class_name: 'Project'
+	has_many :participations
 	def self.find_or_create_from_auth_hash(auth_hash)
 		provider = auth_hash[:provider]
 		uid = auth_hash[:uid]
