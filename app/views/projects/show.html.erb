@@ -7,6 +7,13 @@
 </div>
 <div class="row">
 	<div class="col-md-8">
+		<% if @project.project_image? %>
+		<div class="thumbnail">
+			<%= image_tag @project.project_image.url %>
+		</div>
+		<% end %>
+<div class="row">
+	<div class="col-md-8">
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -16,6 +23,9 @@
 		<%= link_to("http://twitter.com/#{@project.owner.nickname}") do %>
 		<%= image_tag @project.owner.image_url %>
 		<%= "@#{@project.owner.nickname}" %>
+		<% end %>
+		<% else %>
+		退会したユーザです
 		<% end %>
 	</div>
 </div>
@@ -49,7 +59,10 @@
 	<%= link_to 'プロジェクト内容を編集する', edit_project_path(@project), class: 'btn btn-info btn-lg btn-block' %>
 	<%= link_to 'プロジェクトを削除する', project_path(@project), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？' } %>
 	<% end %>
-	<% if logged_in? %>
+	<% if @participation %>
+	<%= link_to '参加をキャンセルする', project_participation_path(@project, @participation), method: :delete, class: 'btn btn-warning btn-lg btn-block' %>
+
+	<% elsif logged_in? %>
 	<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createParticipation">
 		参画する
 	</button>
@@ -73,9 +86,36 @@
 		</div>
 </div>
 <% else %>
-<%= link_to '参加する', new_project_participation_path(@project), class: "btn btn-primary btn-lg btn-block" %>
+<%= link_to '参画する', new_project_participation_path(@project), class: "btn btn-primary btn-lg btn-block" %>
 <% end %>
+<hr>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		参画者
 </div>
+<div class="panel-body">
+	<ul class="list-unstyled">
+		<% @participations.each do |participation| %>
+		<li>
+			<%= link_to(url_for_twitter(participation.user)) do %>
+			<%= image_tag participation.user.image_url, width: 20, height: 20 %>
+			<%= "@#{participation.user.nickname}" %>
+
+			<% end %>
+			<%= participation.comment %>
+		</li>
+		<% else %>
+		退会したユーザです
+		<% end %>
+		<% end %>
+
+
+		</ul>
+	</div>
+	</div>
+</div>
+
+		
 </div>
 
 

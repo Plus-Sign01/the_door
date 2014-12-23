@@ -5,24 +5,27 @@ ruby '2.1.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
 gem 'bootstrap-sass', '3.3.1.0'
-gem 'sprockets', '2.11.0';
+gem 'sprockets', '2.11.0'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'omniauth', '1.2.1'
 gem 'omniauth-twitter', '1.0.1'
+gem 'ransack', '1.2.2'
+gem 'carrierwave', '0.10.0'
+gem 'mini_magick', '3.7.0'
 # Use sqlite3 as the database for Active Record
 group :development, :test do
 gem 'sqlite3','1.3.8'
-gem 'rspec-rails', '2.13.1'
+gem 'rspec-rails', '3.0.0'
 end
-gem 'minitest'
+
 gem 'bcrypt-ruby', '3.1.2'
 
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
+  gem 'capybara', '2.2.0'
   gem 'factory_girl_rails', '4.2.1'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'

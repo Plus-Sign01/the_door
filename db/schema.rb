@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222043225) do
+ActiveRecord::Schema.define(version: 20141222152638) do
 
   create_table "participations", force: true do |t|
     t.integer  "user_id"
@@ -35,19 +35,18 @@ ActiveRecord::Schema.define(version: 20141222043225) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "project_image"
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.string   "nickname",   null: false
+    t.string   "image_url",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "remember_token"
-    t.boolean  "admin",           default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
 
 end

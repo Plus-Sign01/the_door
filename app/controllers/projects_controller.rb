@@ -3,6 +3,9 @@ class ProjectsController < ApplicationController
 	
 	def show 
 		@project = Project.find(params[:id])
+		@participation = current_user && current_user.participations.find_by(project_id: params[:id])
+		@participation = @project.participations.includes(:user).order(:created_at)
+
 	end
 	def new
 		@project = current_user.created_projects.build
@@ -33,12 +36,12 @@ class ProjectsController < ApplicationController
 		@project.destroy!
 		redirect_to root_path, notice: '削除しました'
 	end
-	
+
 
 
 	private
 	def project_params
-		params.require(:project).permit(:name, :place, :content, :start_time, :end_time)
+		params.require(:project).permit(:name, :place, :project_image, :project_image_cache, :remove_project_image, :content, :start_time, :end_time)
 	end
 end
 

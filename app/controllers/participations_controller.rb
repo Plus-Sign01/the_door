@@ -15,6 +15,11 @@ class ParticipationsController < ApplicationController
 			render json: { messages: participation.errors.full_messages }, status: 422
 		end
 	end
+	def destroy
+		participation = current_user.participations.find_by!(project_id: params[:project_id])
+		participation.destroy!
+		redirect_to project_path(params[:project_id]), notice: 'このプロジェクトの参加をキャンセルしました'
+	end
 
 
 end

@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
-	has_many :participations
+	mount_uploader :project_image, ProjectImageUploader
+	has_many :participations, dependent: :destroy
 	belongs_to :owner, class_name: 'User'
 	validates :name, length: { maximum: 50 }, presense: true
 	validates :place, length: { maximum: 100 }, presense: true
