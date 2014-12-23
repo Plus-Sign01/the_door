@@ -39,14 +39,16 @@ ActiveRecord::Schema.define(version: 20141222152638) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
-    t.string   "nickname",   null: false
-    t.string   "image_url",  null: false
+    t.string   "name"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.boolean  "admin",           default: false
   end
 
-  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
