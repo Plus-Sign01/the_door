@@ -16,6 +16,7 @@ gem 'omniauth-twitter', '1.0.1'
 gem 'ransack', '1.2.2'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.7.0'
+
 # Use sqlite3 as the database for Active Record
 group :development, :test do
 gem 'sqlite3','1.3.8'
@@ -31,6 +32,7 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
+  gem 'shoulda-matchers', '2.6.0'
 
 
 end

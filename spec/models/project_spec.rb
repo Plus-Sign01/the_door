@@ -1,20 +1,12 @@
 require 'spec_helper'
 
-describe Project do
-	describe '#name' do
-		example '空白のとき' do
-　　　　 let(:project) { Project.new(name: '') }
 
-           it 'valid でないこと' do 
-          	project.valid?
-          	expect(project.errors[:name]).to be_present
-          end
+describe Project do 
+      describe '#name' do 
+      	it { should validate_presence_of(:name) }
+      	it { should ensure_length_of(:name).is_at_most(50) }
 
-          	
-          end
-		
-	end
-
-
+      	
+      end
 	
 end

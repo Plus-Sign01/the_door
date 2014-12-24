@@ -1,17 +1,19 @@
 ja:
-activerecord:
-models:
-project: プロジェクト
-attributes:
-project:
-name: 名前
-place: 場所
-start_time: 開始期間
-end_time:　終了期間
-content: プロジェクト内容
-project_image: プロジェクト画像
+　　activerecord:
+　　　models:
+　　　　project: プロジェクト
+　　　　participation: 参加
+　　　attributes:
+　　　　  project:
+　　　　　name: 名前
+　　　　　place: 場所
+　　　　　start_time: 開始期間
+　　　　　end_time: 終了期間
+　　　　　content: プロジェクト内容
+　　　　　project_image: プロジェクト画像
 
-participation:
-school: 学歴
-skill: スキル
-comment: コメント
+　　　  participation:
+　　　　　  school: 学歴
+　　　　　　language: 言語
+　　　　　  skill: スキル
+　　　　　  comment: コメント

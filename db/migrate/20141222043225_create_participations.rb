@@ -4,6 +4,7 @@ class CreateParticipations < ActiveRecord::Migration
       t.references :user, index: true
       t.references :project, index: true
       t.string :school
+      t.string :language
       t.string :skill
       t.string :comment
 
