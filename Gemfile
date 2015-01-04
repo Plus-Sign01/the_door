@@ -16,6 +16,8 @@ gem 'omniauth-twitter', '1.0.1'
 gem 'ransack', '1.2.2'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.7.0'
+gem 'kaminari', '0.15.1'
+gem 'kaminari-bootstrap', '3.0.1'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do

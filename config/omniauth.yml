@@ -1,0 +1,13 @@
+production: &production
+  facebook:
+    key: xxxx
+    secret: XXXX
+
+development: &development
+  <<: *production
+  facebook:
+    key: xxxx
+    secret: XXXX
+
+test: 
+  <<: *development
