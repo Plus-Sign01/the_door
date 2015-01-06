@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate, expect :show
-	
+
 	def show 
 		@project = Project.find(params[:id])
 		@participation = current_user && current_user.participations.find_by(project_id: params[:id])
@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
 	def create
 		@project = current_user.created_projects.build(project_params)
 		if @project.save
+			flash[:success] = "Welcome to the The Door"
 			redirect_to @project, notice: '作成しました'
 		else
 			render :new

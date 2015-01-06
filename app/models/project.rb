@@ -9,6 +9,14 @@ class Project < ActiveRecord::Base
 	validates :start_time, presence: true
 	validates :end_time, presence: true
 	validate :start_time_should_be_before_end_time
+
+	def self.search(search)
+		if search
+			Project.where(['name LIKE ?', "%#{search}"])
+		else
+			Project.all
+		end
+	end
 	def created_by?(user)
 		return false unless user
 		owner_id == user.id
