@@ -1,6 +1,14 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate, expect :show
 
+	def index
+		@projects = Project.search(params[:search])
+		@projects = Project.all
+	end
+
+	
+
+
 	def show 
 		@project = Project.find(params[:id])
 		@participation = current_user && current_user.participations.find_by(project_id: params[:id])
@@ -15,7 +23,7 @@ class ProjectsController < ApplicationController
 		@project = current_user.created_projects.build(project_params)
 		if @project.save
 			flash[:success] = "Welcome to the The Door"
-			redirect_to @project, notice: '作成しました'
+			redirect_to @project, notice: 'created project'
 		else
 			render :new
 		end
@@ -27,7 +35,7 @@ class ProjectsController < ApplicationController
 	def update
 		@project = current_user.created_projects.find(parmas[:id])
 		if @project.update(project_params)
-			redirect_to @project, notice: '更新しました'
+			redirect_to @project, notice: 'renewed project'
 		else
 			render :edit
 		end
@@ -35,7 +43,7 @@ class ProjectsController < ApplicationController
 	def destroy
 		@project = current_user.created_projects.find(params[:id])
 		@project.destroy!
-		redirect_to root_path, notice: '削除しました'
+		redirect_to root_path, notice: 'deleted project'
 	end
 
 
@@ -44,6 +52,10 @@ class ProjectsController < ApplicationController
 	def project_params
 		params.require(:project).permit(:name, :place, :project_image, :project_image_cache, :remove_project_image, :content, :start_time, :end_time)
 	end
+	def logged_in_user
+		redirect_to login_url,notice: "Please log in" unless logged_in?
+	end
+
 end
 
 

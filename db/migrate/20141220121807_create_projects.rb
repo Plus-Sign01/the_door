@@ -6,6 +6,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :place,         null: false
       t.datetime :start_time,  null: false
       t.datetime :end_time,    null: false
+      t.string :image_url,     null: false
       t.text :content,         null: false
 
       t.timestamps

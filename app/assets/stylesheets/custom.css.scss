@@ -8,6 +8,7 @@ html {
 
 body {
   padding-top: 60px;
+  text-align: center;
 }
 
 section {
@@ -139,15 +140,42 @@ input {
 li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid 999;}
+    border-top: 1px solid 999;
+  }
 
 :last-child {
       border-bottom: 1px solid 999;
     }
-  
+  /* footer */
+  footer {
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px;
+    color: #999;
 
+  }
+  footer a {
+    color: #555;
+  }
+  footer a:hover {
+    color: #222;
+  }
+  footer small {
+    float: left;
+  }
+  footer ul {
+    float: right;
+    list-style: none;
+  }
+  footer ul li {
+    float: left;
+    margin-left: 10px;
+  }
+  /* header */
 
-
+  header li {
+    float: left;
+  }
 
 
 

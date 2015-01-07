@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-
+    
 	mount_uploader :project_image, ProjectImageUploader
 	has_many :participations, dependent: :destroy
 	belongs_to :owner, class_name: 'User'
