@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate
+  
+
   def create
     # Facebookでログイン
     if env['omniauth.auth'].present?

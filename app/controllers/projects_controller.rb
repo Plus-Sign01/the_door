@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-	before_action :authenticate, expect :show
+	before_action :authenticate, except: :show
+	before_filter :authenticate_user!
 
 	def index
 		@projects = Project.search(params[:search])
@@ -53,10 +54,11 @@ class ProjectsController < ApplicationController
 		params.require(:project).permit(:name, :place, :project_image, :project_image_cache, :remove_project_image, :content, :start_time, :end_time)
 	end
 	def logged_in_user
-		redirect_to login_url,notice: "Please log in" unless logged_in?
+		redirect_to login_url,notice: "Please login" unless logged_in?
 	end
 
 end
 
 
-end
+
+

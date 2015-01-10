@@ -1,12 +1,15 @@
-Rails.application.routes.draw do
+TheDoor::Application.routes.draw do
 
   root to: 'welcome#index'
-  get '/auth/:provider/callback' => 'sessions#create'
   get '/login' => 'sessions#create', as: :login
-  get '/logout' => 'sessions#destroy', as: :logout
-  get '/auth/facebook'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+
+  get 'auth/:provider/callback', to: 'sessions#create'
+  #get 'auth/failure', to: redirect('/')
+  get '/logout', to: 'sessions#destroy', as: :logout
   resources :user do 
+
     get 'retire'
 
 

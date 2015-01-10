@@ -3,15 +3,16 @@
 		<div class="container">
 			<%= link_to "The Door", root_path, id: "logo" %>
 			<nav>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav pull-right">
+					
 					<li><%= link_to "Home", root_path %></li>
-					<li><%= link_to "make projects", new_project_path %></li>
+					<li><%= link_to "Make Projects", new_project_path %></li>
 					<% if logged_in? %>
-					<li><%= link_to "make projects", new_user_path %></li>
-					<li><%= link_to "retire", retire_user_path %></li>
-					<li><%= link_to 'ログアウト', logout_path %></li>
+					<li><%= link_to "Retire", retire_user_path %></li>
+					<li><%= link_to 'Logout', logout_path %></li>
                     <% else %>
-                    <li><%= link_to 'Facebookでログイン', '/auth/facebook' %></li>
+                    <li><%= link_to 'Log in with Facebook', user_omniauth_authorize_path(:facebook) %></li>
                     <% end %>
                 </ul>
             </nav>

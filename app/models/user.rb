@@ -1,26 +1,34 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  
+  
+ devise :database_authenticatable, :registerable,
+        :recoverable, :rememberable, :validatable,
+        :omniauthable, :lockable, :confirmable
+
 	before_destroy :check_all_projects_finished
 
 	has_many :created_projects, class_name: 'Project', foreign_key: :owner_id, dependent: :nullify
 
 	has_many :participations, dependent: :nullify
 	has_many :participation_projects, through: :participantions, source: :project
-	def self.find_or_create_from_auth_hash(auth_hash)
-		provider = auth_hash[:provider]
-		uid = auth_hash[:uid]
-		nickname = auth_hash[:info][:nickname]
-		image_url = auth_hash[:info][:image]
 
-		User.find_or_create_by(provider: provider, uid: uid) do |user|
-           user.nickname = nickname
-           user.image_url = image_url
-       end
-   end
+	def self.find_for_facebook_oauth(auth)
+		user = User.where(provider: auth.provider, uid: auth.uid).first
 
+		unless user
+			user = User.create( name:     auth.extra.raw_info.name,
+				                provider: auth.provider,
+				                uid:      auth.uid,
+				                email:    auth.info.email,
+				                token:    auth.credentials.token,
+				                password: Devise.friendly_token[0.20] )
+		end
+			return user
+		end
 
-
-
-
+	
 	private
 	 def check_all_projects_finished
 	 	now = Time.zone.now
@@ -32,6 +40,6 @@ class User < ActiveRecord::Base
 	 	end
 	 	errors.blank?
 	 end
-	 
+
 
 end
