@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
  devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable,
-        :omniauthable, :lockable, :confirmable
+        :omniauthable, :lockable, :confirmable, :omniauth_providers => [:facebook]
 
 	before_destroy :check_all_projects_finished
 
@@ -15,18 +15,24 @@ class User < ActiveRecord::Base
 	has_many :participation_projects, through: :participantions, source: :project
 
 	def self.find_for_facebook_oauth(auth)
-		user = User.where(provider: auth.provider, uid: auth.uid).first
-
-		unless user
-			user = User.create( name:     auth.extra.raw_info.name,
-				                provider: auth.provider,
-				                uid:      auth.uid,
-				                email:    auth.info.email,
-				                token:    auth.credentials.token,
-				                password: Devise.friendly_token[0.20] )
-		end
+		user = User.where(:provider => auth.provider, :uid => auth.uid).first
+		if user
 			return user
-		end
+		else
+			logged_in_user = User.where(:email => auth.info.email).first
+			if logged_in_user 
+			return logged_in_user
+			else
+			user = User.create(name:auth.extra.raw_info.name,
+				               provider:auth.provider,
+				               uid:auth.uid,
+				               email:auth.info.email,
+				               password:Devise.friendly_token[0,20],
+				               )
+				               end
+				               end
+				           end
+
 
 	
 	private
