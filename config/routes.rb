@@ -1,8 +1,7 @@
 TheDoor::Application.routes.draw do
 
   root to: 'welcome#index'
-  get '/login' => 'sessions#create', as: :login
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  get '/login' => 'sessions#create', as: :login, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
 
   get 'auth/:provider/callback', to: 'sessions#create'
