@@ -1,5 +1,6 @@
 TheDoor::Application.routes.draw do
 
+  devise_for :users
   root to: 'welcome#index'
   get '/login' => 'sessions#create', as: :login, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
