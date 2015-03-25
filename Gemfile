@@ -24,7 +24,6 @@ gem 'sqlite3','1.3.8'
 gem 'rspec-rails', '3.0.0'
 end
 
-gem 'bcrypt-ruby', '3.1.2'
 
 
 group :test do
