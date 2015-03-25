@@ -20,7 +20,6 @@ gem 'kaminari-bootstrap', '3.0.1'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
-gem 'pry-rails'	
 gem 'sqlite3','1.3.8'
 gem 'rspec-rails', '3.0.0'
 end
@@ -31,8 +30,6 @@ gem 'bcrypt-ruby', '3.1.2'
 group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.2.0'
-  gem 'factory_girl_rails', '4.2.1'
-  gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'shoulda-matchers', '2.6.0'
 
@@ -49,7 +46,6 @@ gem 'coffee-rails','4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails','3.0.4'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks','1.1.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
