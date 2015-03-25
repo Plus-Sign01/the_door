@@ -30,7 +30,6 @@ gem 'bcrypt-ruby', '3.1.2'
 group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.2.0'
-  gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'shoulda-matchers', '2.6.0'
 
 
