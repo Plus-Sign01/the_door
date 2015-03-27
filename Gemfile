@@ -32,6 +32,10 @@ group :test do
 end
 # Use SCSS for stylesheets
 # Use Uglifier as compressor for JavaScript assets
+
+
+
+
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails','4.0.0'
 
