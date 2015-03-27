@@ -7,7 +7,6 @@ gem 'rails', '4.1.7'
 gem 'bootstrap-sass', '3.3.1.0'
 gem 'sprockets', '2.11.0'
 gem 'faker', '1.1.2'
-gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'devise'
 gem 'omniauth', '1.2.1'
@@ -33,7 +32,6 @@ group :test do
 end
 # Use SCSS for stylesheets
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier','1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails','4.0.0'
 
